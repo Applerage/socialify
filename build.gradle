@@ -1,0 +1,40 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.0'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id "org.sonarqube" version "3.4.0.2513"
+}
+
+group = 'socialify'
+version = '0.1'
+sourceCompatibility = '11'
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
+ext {
+    set('springCloudVersion', "2021.0.3-SNAPSHOT")
+}
+repositories {
+    mavenCentral()
+}
+sonarqube {
+    properties {
+        property "sonar.projectKey", "Socialify"
+        property "sonar.qualitygate.wait", true
+    }
+}
+dependencies {
+
+}
+
+dependencyManagement {
+
+}
+tasks.named('test') {
+    useJUnitPlatform()
+}

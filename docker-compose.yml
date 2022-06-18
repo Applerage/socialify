@@ -1,0 +1,65 @@
+version: "3.9"
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    hostname: rabbitmq
+    container_name: rabbitmq
+    volumes:
+      - ./rabbitmq/etc/definitions.json:/etc/rabbitmq/definitions.json
+      - ./rabbitmq/etc/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./rabbitmq/data:/var/lib/rabbitmq/mnesia/rabbit@my-rabbit
+      - ./rabbitmq/logs:/var/log/rabbitmq/log
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  cloud-gateway:
+    build: cloud-gateway
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://service-registy:8761/eureka
+    ports:
+      - "8084:8084"
+    restart: on-failure
+    depends_on:
+      - service-registy
+
+  post-service:
+    build: post-service
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://service-registy:8761/eureka
+    ports:
+      - "8081:8081"
+    restart: on-failure
+    depends_on:
+      - service-registy
+
+  service-registy:
+    build: service-registry
+    environment:
+      eureka.instance.hostname: service-registy
+      eureka.client.serviceUrl.defaultZone: http://service-registy:8761/eureka
+    ports:
+      - "8761:8761"
+    restart: on-failure
+
+  song-service:
+    build: song-service
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://service-registy:8761/eureka
+    ports:
+      - "8083:8083"
+    restart: on-failure
+    depends_on:
+      - service-registy
+
+  user-service:
+    build: user-service
+    environment:
+      eureka.client.serviceUrl.defaultZone: http://service-registy:8761/eureka
+    ports:
+      - "8082:8082"
+    restart: on-failure
+    depends_on:
+      - service-registy
+
