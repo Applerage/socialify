@@ -31,7 +31,13 @@ sonarqube {
 dependencies {
 
 }
-
+sonarqube {
+    properties {
+        property "sonar.projectKey", "Applerage_socialify"
+        property "sonar.organization", "socialify"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
+}
 dependencyManagement {
 
 }
