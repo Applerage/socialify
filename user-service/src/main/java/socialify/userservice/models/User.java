@@ -1,19 +1,21 @@
 package socialify.userservice.models;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
 import javax.persistence.*;
 
-@Entity
-@Table(name= "users")
+@Document(collection = "Users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 
-   // @Column(name = "id")
-    private Long userId;
-    //@Column(name = "username")
+    @Field
+    private String userId;
+    @Field
     private String username;
-    //@Column(name="email")
+    @Field
     private String email;
 
     public User(){
@@ -33,7 +35,11 @@ public class User {
         return username;
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
+    }
+    @Override
+    public String toString(){
+        return String.format("Post[id='%s', username='%s', email='%s']", userId, username, email);
     }
 }
