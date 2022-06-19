@@ -1,7 +1,7 @@
 rootProject.name = 'socialify'
 
+include 'service-registry'
 include 'cloud-gateway'
 include 'post-service'
-include 'service-registry'
 include 'song-service'
 include 'user-service'
