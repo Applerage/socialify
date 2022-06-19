@@ -15,7 +15,9 @@ public class SongService {
         return songRepository.save(song);
     }
 
-    public Song findSongById(Long songId) {
-        return songRepository.findBySongId(songId);
+    public Song findSongById(String id) {
+        return songRepository.findBySongId(id);
     }
+
+
 }

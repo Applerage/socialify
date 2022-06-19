@@ -1,36 +1,36 @@
 package socialify.postservice.models;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
-@Entity
-@Table(name = "posts")
+@Document(collection = "Posts")
 public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
-    //@Column (name = "id")
-    private Long postId;
-    //@Column (name = "userId")
+    private String postId;
+    @Field
     private String userId;
-    //@Column (name = "song")
+    @Field
     private String song;
-    //@Column (name = "text")
+    @Field
     private String text;
-    //@Column (name = "timestamp")
-    private Timestamp time;
+    @Field
+    private String time;
 
     public Post(){
 
     }
 
 
-    public Post(String user, String song, String text, Timestamp time) {
+    public Post(String user, String song, String text) {
         this.userId = user;
         this.song = song;
         this.text = text;
-        this.time = time;
+        this.time = String.valueOf(new Timestamp(System.currentTimeMillis()));
     }
 
     public String getSong() {
@@ -41,7 +41,7 @@ public class Post {
         return text;
     }
 
-    public Timestamp getTime() {
+    public String getTime() {
         return time;
     }
 
@@ -49,7 +49,12 @@ public class Post {
         return userId;
     }
 
-    public Long getPostId() {
+    public String getPostId() {
         return postId;
+    }
+
+    @Override
+    public String toString(){
+        return String.format("Post[id='%s', song='%s', text='%s', time='%s', userId='%s']", postId, song, text, time, userId);
     }
 }

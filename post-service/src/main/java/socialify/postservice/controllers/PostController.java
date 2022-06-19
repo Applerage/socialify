@@ -19,11 +19,11 @@ public class PostController {
     }
 
     @GetMapping("/user/{id}")
-    public ResponseTemplateVO getPostWithUser(@PathVariable("id") Long postId){
+    public ResponseTemplateVO getPostWithUser(@PathVariable("id") String postId){
         return postService.getPostWithUser(postId);
     }
 
     @GetMapping("/{id}")
-    public Post findPostById(@PathVariable("id") Long postId){ return postService.findPostById(postId); }
+    public Post findPostById(@PathVariable("id") String postId){ return postService.findPostById(postId); }
 
 }

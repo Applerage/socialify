@@ -21,7 +21,7 @@ public class PostService {
         return postRepository.save(post);
     }
 
-    public ResponseTemplateVO getPostWithUser(Long postId) {
+    public ResponseTemplateVO getPostWithUser(String postId) {
         ResponseTemplateVO vo = new ResponseTemplateVO();
         Post post = postRepository.findUserByPostId(postId);
         User user =
@@ -34,7 +34,7 @@ public class PostService {
         return vo;
     }
 
-    public Post findPostById(Long postId) {
+    public Post findPostById(String postId) {
         return postRepository.findByPostId(postId);
     }
 }

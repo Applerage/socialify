@@ -24,8 +24,8 @@ public class SongController {
     }
 
     @GetMapping("/{id}")
-    public Song findSongById(@PathVariable("id") Long songId){
-        return songService.findSongById(songId);
+    public Song findSongById(@PathVariable("id") String id){
+        return songService.findSongById(id);
     }
 
     @Autowired

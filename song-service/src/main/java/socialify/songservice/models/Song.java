@@ -1,21 +1,21 @@
 package socialify.songservice.models;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
 import javax.persistence.*;
 
-@Entity
-@Table(name = "songs")
+@Document(collection = "Songs")
 public class Song {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
-    //@Column(name = "id")
-    private Long songId;
-    //@Column(name = "name")
+    private String songId;
+    @Field
     private String name;
-    //@Column(name = "artist")
+    @Field
     private String artist;
-    //@Column(name = "album")
+    @Field
     private String album;
 
     public Song(){
@@ -32,7 +32,7 @@ public class Song {
         return name;
     }
 
-    public Long getSongId() {
+    public String getSongId() {
         return songId;
     }
 
@@ -42,5 +42,10 @@ public class Song {
 
     public String getAlbum() {
         return album;
+    }
+
+    @Override
+    public String toString(){
+        return String.format("Song[id='%s', name='%s', artist='%s', album='%s']", songId, name, artist, album);
     }
 }
